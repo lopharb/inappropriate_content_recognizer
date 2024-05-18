@@ -130,7 +130,7 @@ ENV/
 dl_env/
 env.bak/
 venv.bak/
-
+model_weights/
 # Spyder project settings
 .spyderproject
 .spyproject
