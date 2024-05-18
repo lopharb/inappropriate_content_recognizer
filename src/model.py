@@ -47,19 +47,21 @@ def get_model(pretrained=True, path=None):
 
     Args:
         pretrained (bool, optional): Whether to load a pretrained model. Defaults to `True`.
+        path (str, optional): The path to the pretrained model file. Defaults to `None`.
 
     Returns:
-        torch.nn.Module: The loaded model or a model with a custom classifier.
+        torch.nn.Module: The loaded pretrained model or a model with a custom classifier.
 
     Raises:
         FileNotFoundError: If the pretrained model file is not found.
 
     Note:
-        - If `pretrained` is `True`, the model is loaded from the file 'frozen_MSE_lr0.1_best.pt' and set to evaluation mode.
+        - If `pretrained` is `True`, the model is loaded from the file specified by `path` and set to evaluation mode.
         - If `pretrained` is `False`, a VGG19 model is instantiated with the weights from ImageNet1K_V1.
         - The custom classifier is defined with a list of linear layers, batch normalization layers, ReLU activation functions, and dropout layers.
         - The model is initialized with the custom classifier, the `freeze` parameter set to `False`, and the VGG19 model as the extractor.
     """
+
     vgg19 = torchvision.models.vgg19(
         torchvision.models.VGG19_Weights.IMAGENET1K_V1)
     params_list = [nn.Linear(25088, 4096, bias=True),
